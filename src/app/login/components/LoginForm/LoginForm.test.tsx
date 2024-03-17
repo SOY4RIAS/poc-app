@@ -2,15 +2,26 @@ import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { LoginForm } from '@/app/login/components/LoginForm';
+import { Paths } from '@/lib/constants';
 
-const login = jest.fn();
-jest.mock('@/providers/AuthStoreProvider', () => ({
-  useAuthStore: jest.fn(() => ({ login })),
+const login = jest.fn(() => Promise.resolve());
+
+jest.mock('@/hooks/auth/useLogin', () => ({
+  useLogin: jest.fn(() => ({ mutateAsync: login, isPending: false })),
+}));
+
+const replace = jest.fn();
+
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(() => ({
+    replace,
+  })),
 }));
 
 describe('LoginForm', () => {
   afterEach(() => {
     login.mockClear();
+    replace.mockClear();
   });
 
   it('should call login', async () => {
@@ -28,8 +39,9 @@ describe('LoginForm', () => {
       expect(login).toHaveBeenCalledTimes(1);
       expect(login).toHaveBeenCalledWith({
         email: 'jL5pE@example.com',
-        name: 'jL5pE',
+        password: '12345678AAAaaa$',
       });
+      expect(replace).toHaveBeenCalledWith(Paths.HOME);
     });
   });
 

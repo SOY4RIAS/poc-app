@@ -16,7 +16,6 @@ import { PokeFinder } from '@/app/components/PokeFinder';
 
 interface PokeListProps {
   search?: string;
-  showPagination?: boolean;
 }
 
 export async function PokeList({ search }: PokeListProps) {

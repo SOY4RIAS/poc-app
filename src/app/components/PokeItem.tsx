@@ -51,6 +51,7 @@ export function PokeItem({ data }: PokeItemProps) {
           variant={'ghost'}
           className="absolute right-2 top-2"
           onClick={handleFavorite}
+          aria-checked={isFavorite}
         >
           <Heart
             className={cn(
