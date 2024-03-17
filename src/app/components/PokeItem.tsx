@@ -62,11 +62,10 @@ export function PokeItem({ data }: PokeItemProps) {
       </CardHeader>
       <CardContent className="flex justify-center">
         <Image
-          src={data.image}
+          src={data.image || ''}
           alt={data.name}
           width={100}
           height={100}
-          unoptimized
           className="object-fill aspect-square"
         />
       </CardContent>

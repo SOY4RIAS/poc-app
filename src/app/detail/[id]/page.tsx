@@ -32,7 +32,6 @@ export default async function Detail({ params: { id } }: DetailParams) {
               alt={pokemon.name}
               width={96}
               height={96}
-              unoptimized
             />
             <div className="grid gap-1.5">
               <div className="flex items-center space-x-2">

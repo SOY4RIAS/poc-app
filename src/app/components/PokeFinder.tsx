@@ -28,7 +28,7 @@ export function PokeFinder() {
       <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={false}>
         <CommandInput
           placeholder="Type a command or search..."
-          onKeyDown={(e) => setQuery(e.currentTarget.value)}
+          onValueChange={setQuery}
         />
         <CommandList>
           <CommandGroup>
@@ -45,7 +45,6 @@ export function PokeFinder() {
                 >
                   <Image
                     src={pokemon.image || ''}
-                    unoptimized
                     width={32}
                     height={32}
                     alt={pokemon.name}
