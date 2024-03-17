@@ -1,39 +1,35 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { AuthActions, AuthState, User } from '@/store/pokeStore/types';
+import {
+  AuthActions as PokeActions,
+  PokeState as PokeState,
+} from '@/store/pokeStore/types';
 
-export type AuthStore = AuthState & AuthActions;
+export type PokeStore = PokeState & PokeActions;
 
-const defaultState: AuthState = {
-  isAuthenticated: false,
-  user: null,
-  _hasHydrated: false,
+const defaultState: PokeState = {
+  favorites: [],
 };
 
-export const createAuthStore = (initialState: AuthState = defaultState) => {
+export const createPokeStore = (initialState: PokeState = defaultState) => {
   return create(
-    persist<AuthStore>(
+    persist<PokeStore>(
       (set) => ({
         ...initialState,
-        _hasHydrated: false,
-        setHasHydrated: (state: boolean) => {
-          set({
-            _hasHydrated: state,
-          });
+        addFavorite(id) {
+          set((state) => ({
+            favorites: [...state.favorites, id],
+          }));
         },
-        login: (user: User) => {
-          set({ isAuthenticated: true, user });
-        },
-        logout: () => {
-          set({ isAuthenticated: false, user: null });
+        removeFavorite(id) {
+          set((state) => ({
+            favorites: state.favorites.filter((f) => f !== id),
+          }));
         },
       }),
       {
-        name: 'auth-store',
-        onRehydrateStorage: () => (state) => {
-          state?.setHasHydrated(true);
-        },
+        name: btoa('poke-store'),
       }
     )
   );

@@ -1,16 +1,8 @@
-export interface User {
-  name: string;
-  email: string;
-}
-
-export interface AuthState {
-  isAuthenticated: boolean;
-  user: User | null;
-  _hasHydrated: boolean;
+export interface PokeState {
+  favorites: string[];
 }
 
 export interface AuthActions {
-  login: (user: User) => void;
-  logout: () => void;
-  setHasHydrated: (state: boolean) => void;
+  addFavorite: (id: string) => void;
+  removeFavorite: (id: string) => void;
 }
