@@ -8,12 +8,14 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Paths } from "@/utils/constants";
 import { cn } from "@/lib/utils";
+import { useAuthStore } from "@/providers/authStoreProvider";
 
 export function Navbar() {
   const pathname = usePathname();
-  debugger;
 
   const isLogin = pathname === Paths.LOGIN;
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   return (
     <>
@@ -63,9 +65,11 @@ export function Navbar() {
         <div className={"ml-auto hidden md:flex gap-4 items-center"}>
           <Link
             href={Paths.LOGIN}
-            className={cn("font-bold", { hidden: isLogin })}
+            className={cn("font-bold", { hidden: isLogin || isAuthenticated })}
           >
-            <Button variant={"outline"}>Login</Button>
+            <Button variant={"outline"}>
+              <span>Login</span>
+            </Button>
           </Link>
         </div>
       </nav>
