@@ -12,6 +12,7 @@ import { getPokemons } from '@/services/pokemonService';
 import { PokeItem } from '@/app/components/PokeItem';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { PokeFinder } from '@/app/components/PokeFinder';
 
 interface PokeListProps {
   search?: string;
@@ -43,6 +44,7 @@ export async function PokeList({ search }: PokeListProps) {
               Previous
             </Link>
           </Button>
+          <PokeFinder />
           <Button
             asChild
             className={cn({
