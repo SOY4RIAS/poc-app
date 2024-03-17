@@ -6,8 +6,8 @@ export interface GetPokemonsResponse {
 }
 
 export interface GetPokemonsParams {
-  offset: string;
-  limit: string;
+  offset?: string;
+  limit?: string;
 }
 
 export interface Pokemon {

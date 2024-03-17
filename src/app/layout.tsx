@@ -5,8 +5,7 @@ import './globals.css';
 
 import { Navbar } from '@/components/Navbar';
 import { cn } from '@/lib/utils';
-import NextAuthProvider from '@/providers/NextAuthProvider';
-import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
+import { Providers } from '@/app/providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,14 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, 'flex flex-col')}>
-        <NextAuthProvider>
-          <ReactQueryProvider>
-            <header className="flex w-full shrink-0 items-center px-4 md:px-6">
-              <Navbar />
-            </header>
-            {children}
-          </ReactQueryProvider>
-        </NextAuthProvider>
+        <Providers>
+          <header className="flex w-full shrink-0 items-center px-4 md:px-6">
+            <Navbar />
+          </header>
+          {children}
+        </Providers>
       </body>
     </html>
   );

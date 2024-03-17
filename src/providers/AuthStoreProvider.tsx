@@ -3,7 +3,7 @@
 import { createContext, useContext, useRef } from 'react';
 import { type StoreApi, useStore } from 'zustand';
 
-import { AuthStore, createAuthStore } from '@/store/auth/authStore';
+import { AuthStore, createAuthStore } from '@/store/pokeStore/pokeStore';
 
 export const AuthStoreContext = createContext<StoreApi<AuthStore> | null>(null);
 

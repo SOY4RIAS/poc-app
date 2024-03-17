@@ -1,6 +1,6 @@
 import { HTTP_STATUS_MESSAGE } from '@/lib/constants/httpStatus';
 
-interface HttpResponse<T> {
+export interface HttpResponse<T> {
   data: T;
   status: string;
   statusCode: number;
@@ -33,7 +33,7 @@ export class HttpClient {
     }
     const fetchPromise = fetch(url);
 
-    return await this.jsonResponse<T>(fetchPromise);
+    return this.jsonResponse<T>(fetchPromise);
   }
 
   async post<T, B>(path: string, body: B): Promise<HttpResponse<T>> {

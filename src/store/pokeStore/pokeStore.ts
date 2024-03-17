@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { AuthActions, AuthState, User } from '@/store/auth/types';
+import { AuthActions, AuthState, User } from '@/store/pokeStore/types';
 
 export type AuthStore = AuthState & AuthActions;
 

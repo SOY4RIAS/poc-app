@@ -1,6 +1,6 @@
 'use client';
 
-import { MenuIcon, PackageIcon } from 'lucide-react';
+import { CircleDashed, MenuIcon, PackageIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -8,7 +8,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Paths } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks/auth/useAuth';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -36,8 +36,8 @@ export function Navbar() {
   return (
     <nav className="flex h-20 w-full items-center px-4 md:px-6">
       <Link className="flex items-center gap-2" href={Paths.HOME}>
-        <PackageIcon className="h-6 w-6" />
-        <span>POC App</span>
+        <CircleDashed className="h-6 w-6 text-primary " />
+        <span>POK App</span>
       </Link>
       <div className="hidden md:flex items-center gap-4 ml-auto"></div>
       <div className="ml-auto flex items-center md:hidden">

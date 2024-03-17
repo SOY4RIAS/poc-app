@@ -17,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useLogin } from '@/hooks/services/useLogin';
+import { useLogin } from '@/hooks/auth/useLogin';
 import { Paths } from '@/lib/constants';
 
 export function LoginForm() {
