@@ -8,18 +8,18 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Paths } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { useAuthStore } from '@/providers/AuthStoreProvider';
+import { useAuth } from '@/hooks/useAuth';
 
 export function Navbar() {
   const pathname = usePathname();
 
   const isLogin = pathname === Paths.LOGIN;
 
-  const { isAuthenticated, user } = useAuthStore((state) => state);
+  const { isAuthenticated, data: sessionData } = useAuth();
 
   const loginSection = (
     <>
-      {isAuthenticated && <span>{user?.name}</span>}
+      {isAuthenticated && <span>{sessionData?.user?.name}</span>}
       <Link
         href={Paths.LOGIN}
         className={cn('font-bold', {
@@ -35,7 +35,7 @@ export function Navbar() {
 
   const linkSection = (
     <>
-      <Link className="font-bold" href="#">
+      <Link className="font-bold" href={Paths.HOME}>
         Tab 1
       </Link>
       <Link className="text-gray-500 dark:text-gray-400" href="#">

@@ -1,17 +1,13 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import {
-  LoginSchema,
-  loginSchema,
-} from '@/app/login/components/LoginForm/schema';
+import { loginResolver, type LoginSchema } from '@/lib/schemas/loginSchema';
 import {
   Form,
   FormControl,
@@ -21,15 +17,13 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { useAuthStore } from '@/providers/AuthStoreProvider';
+import { useLogin } from '@/hooks/services/useLogin';
+import { Paths } from '@/lib/constants';
 
 export function LoginForm() {
-  const { login } = useAuthStore((state) => ({
-    login: state.login,
-  }));
+  const router = useRouter();
 
-  const [isSubmiting, setIsSubmiting] = useState(false);
-  const toggleSubmit = () => setIsSubmiting((prev) => !prev);
+  const { mutateAsync: login, isPending: isSubmitting } = useLogin();
 
   const form = useForm<LoginSchema>({
     mode: 'onSubmit',
@@ -37,18 +31,13 @@ export function LoginForm() {
       email: '',
       password: '',
     },
-    resolver: zodResolver(loginSchema),
+    resolver: loginResolver,
   });
 
-  const onSubmit = (values: LoginSchema) => {
-    toggleSubmit();
-    setTimeout(() => {
-      login({
-        email: values.email,
-        name: values.email.split('@')[0],
-      });
-      toggleSubmit();
-    }, 1000);
+  const onSubmit = (data: LoginSchema) => {
+    login(data).then(() => {
+      router.replace(Paths.HOME);
+    });
   };
 
   return (
@@ -94,8 +83,8 @@ export function LoginForm() {
             </div>
           </CardContent>
           <CardFooter className="flex">
-            <Button className="w-full" type="submit" disabled={isSubmiting}>
-              {isSubmiting ? (
+            <Button className="w-full" type="submit" disabled={isSubmitting}>
+              {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Logining

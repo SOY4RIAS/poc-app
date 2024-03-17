@@ -1,7 +1,14 @@
-export default function Home() {
-  return (
-    <main className="flex h-full flex-col items-center justify-between p-24">
-      <h1>Hello World</h1>
-    </main>
-  );
+import { redirect } from 'next/navigation';
+
+import { auth } from '@/lib/auth';
+import { Paths } from '@/lib/constants';
+
+export default async function RootPage() {
+  const session = await auth();
+
+  if (session) {
+    return redirect(Paths.HOME);
+  } else {
+    return redirect(Paths.LOGIN);
+  }
 }

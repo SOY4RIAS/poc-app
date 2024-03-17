@@ -1,3 +1,4 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 export const loginSchema = z.object({
@@ -23,5 +24,7 @@ export const loginSchema = z.object({
       message: 'Password must contain at least 1 special character',
     }),
 });
+
+export const loginResolver = zodResolver(loginSchema);
 
 export type LoginSchema = z.infer<typeof loginSchema>;
