@@ -1,14 +1,25 @@
-import { redirect } from 'next/navigation';
+import { FlaskConicalIcon, HomeIcon } from 'lucide-react';
 
-import { auth } from '@/lib/auth';
-import { Paths } from '@/lib/constants';
+import { Dummy, PokeList } from '@/app/components';
+import { TabBuilder } from '@/components/TabBuilder';
 
-export default async function RootPage() {
-  const session = await auth();
-
-  if (session) {
-    return redirect(Paths.HOME);
-  } else {
-    return redirect(Paths.LOGIN);
-  }
+export default function Home() {
+  return (
+    <main className="p-10 h-full overflow-hidden">
+      <TabBuilder
+        tabs={[
+          {
+            icon: <HomeIcon size={20} />,
+            label: 'Home',
+            component: <PokeList />,
+          },
+          {
+            icon: <FlaskConicalIcon size={20} />,
+            label: 'Dummy',
+            component: <Dummy />,
+          },
+        ]}
+      />
+    </main>
+  );
 }

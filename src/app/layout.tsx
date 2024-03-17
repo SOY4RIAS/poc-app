@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 
 import './globals.css';
 
-import { Navbar } from '@/app/components/Navbar/Navbar';
+import { Navbar } from '@/components/Navbar';
 import { cn } from '@/lib/utils';
 import NextAuthProvider from '@/providers/NextAuthProvider';
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider';
