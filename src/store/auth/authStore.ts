@@ -1,13 +1,14 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-import { AuthActions, AuthState, User } from "@/store/auth/types";
+import { AuthActions, AuthState, User } from '@/store/auth/types';
 
 export type AuthStore = AuthState & AuthActions;
 
 const defaultState: AuthState = {
   isAuthenticated: false,
   user: null,
+  _hasHydrated: false,
 };
 
 export const createAuthStore = (initialState: AuthState = defaultState) => {
@@ -15,6 +16,12 @@ export const createAuthStore = (initialState: AuthState = defaultState) => {
     persist<AuthStore>(
       (set) => ({
         ...initialState,
+        _hasHydrated: false,
+        setHasHydrated: (state: boolean) => {
+          set({
+            _hasHydrated: state,
+          });
+        },
         login: (user: User) => {
           set({ isAuthenticated: true, user });
         },
@@ -23,8 +30,11 @@ export const createAuthStore = (initialState: AuthState = defaultState) => {
         },
       }),
       {
-        name: "auth-store",
-      },
-    ),
+        name: 'auth-store',
+        onRehydrateStorage: () => (state) => {
+          state?.setHasHydrated(true);
+        },
+      }
+    )
   );
 };

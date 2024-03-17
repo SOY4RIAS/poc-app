@@ -1,16 +1,18 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
 
-import "./globals.css";
+import './globals.css';
 
-import { Navbar } from "@/app/components/Navbar/Navbar";
-import { AuthStoreProvider } from "@/providers/authStoreProvider";
+import { Navbar } from '@/app/components/Navbar/Navbar';
+import { AuthStoreProvider } from '@/providers/AuthStoreProvider';
+import { cn } from '@/lib/utils';
+import { HydrateFlow } from '@/components/HydrateFlow/HydrateFlow';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "POC app",
-  description: "POC 57B app description",
+  title: 'POC app',
+  description: 'POC 57B app description',
 };
 
 export default function RootLayout({
@@ -20,12 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={cn(inter.className, 'flex flex-col')}>
         <AuthStoreProvider>
-          <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-6">
-            <Navbar />
-          </header>
-          {children}
+          <HydrateFlow>
+            <header className="flex w-full shrink-0 items-center px-4 md:px-6">
+              <Navbar />
+            </header>
+            {children}
+          </HydrateFlow>
         </AuthStoreProvider>
       </body>
     </html>

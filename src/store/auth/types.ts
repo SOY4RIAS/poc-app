@@ -6,9 +6,11 @@ export interface User {
 export interface AuthState {
   isAuthenticated: boolean;
   user: User | null;
+  _hasHydrated: boolean;
 }
 
 export interface AuthActions {
   login: (user: User) => void;
   logout: () => void;
+  setHasHydrated: (state: boolean) => void;
 }

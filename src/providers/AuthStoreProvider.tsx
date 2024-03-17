@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useRef } from "react";
-import { type StoreApi, useStore } from "zustand";
+import { createContext, useContext, useRef } from 'react';
+import { type StoreApi, useStore } from 'zustand';
 
-import { AuthStore, createAuthStore } from "@/store/auth/authStore";
+import { AuthStore, createAuthStore } from '@/store/auth/authStore';
 
 export const AuthStoreContext = createContext<StoreApi<AuthStore> | null>(null);
 
@@ -28,7 +28,7 @@ export function AuthStoreProvider({ children }: AuthStoreProviderProps) {
 export function useAuthStore<T>(selector: (state: AuthStore) => T) {
   const store = useContext(AuthStoreContext);
   if (!store) {
-    throw new Error("useAuthStore must be used within an AuthStoreProvider");
+    throw new Error('useAuthStore must be used within an AuthStoreProvider');
   }
 
   return useStore(store, selector);
