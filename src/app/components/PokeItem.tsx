@@ -3,20 +3,18 @@
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { MouseEvent } from 'react';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { POKEMON_IMAGE_URL } from '@/lib/constants/url';
 import { Button } from '@/components/ui/button';
 import { usePokeStore } from '@/providers/PokeStoreProvider';
 import { cn, extractId } from '@/lib/utils';
 import { Paths } from '@/lib/constants';
 import { animatePageOut } from '@/animations';
+import { Pokemon } from '@/lib/types';
 
 interface PokeItemProps {
-  data: {
-    name: string;
-    url: string;
-  };
+  data: Pokemon;
 }
 
 export function PokeItem({ data }: PokeItemProps) {
@@ -30,7 +28,10 @@ export function PokeItem({ data }: PokeItemProps) {
     };
   });
 
-  const handleFavorite = () => toggleFavorite(data);
+  const handleFavorite = (e: MouseEvent) => {
+    e.stopPropagation();
+    toggleFavorite(data);
+  };
 
   const handleClick = () => {
     const id = extractId(data.url);
@@ -61,7 +62,7 @@ export function PokeItem({ data }: PokeItemProps) {
       </CardHeader>
       <CardContent className="flex justify-center">
         <Image
-          src={POKEMON_IMAGE_URL.replace('[name]', data.name.toLowerCase())}
+          src={data.image}
           alt={data.name}
           width={100}
           height={100}

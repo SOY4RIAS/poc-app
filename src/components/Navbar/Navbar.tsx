@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Paths } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/auth/useAuth';
+import TransitionLink from '@/components/TransitionLink/TransitionLink';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -35,10 +36,10 @@ export function Navbar() {
 
   return (
     <nav className="flex h-20 w-full items-center px-4 md:px-6">
-      <Link className="flex items-center gap-2" href={Paths.HOME}>
+      <TransitionLink className="flex items-center gap-2" href={Paths.HOME}>
         <CircleDashed className="h-6 w-6 text-primary " />
         <span>POK App</span>
-      </Link>
+      </TransitionLink>
       <div className="hidden md:flex items-center gap-4 ml-auto"></div>
       <div className="ml-auto flex items-center md:hidden">
         <Sheet>

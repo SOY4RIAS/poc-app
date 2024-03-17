@@ -27,6 +27,11 @@ export const animatePageIn = () => {
 };
 
 export const animatePageOut = (href: string, router: AppRouterInstance) => {
+  const currentPath = window.location.pathname;
+  if (href === currentPath) {
+    return;
+  }
+
   const animationWrapper = document.getElementById('transition-element');
 
   if (animationWrapper) {
