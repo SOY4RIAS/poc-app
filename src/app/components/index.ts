@@ -1,2 +1,2 @@
-export { Dummy } from './Dummy';
+export { PokeFavorites as PokeFavorites } from './PokeFavorites';
 export { PokeList } from './PokeList';

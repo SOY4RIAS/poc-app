@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, ArrowRightFromLine } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import {
   Card,
@@ -9,12 +9,13 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { getPokemons } from '@/services/pokemonService';
-import { PokeItem } from '@/app/components/PokeList/PokeItem';
+import { PokeItem } from '@/app/components/PokeItem';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 interface PokeListProps {
   search?: string;
+  showPagination?: boolean;
 }
 
 export async function PokeList({ search }: PokeListProps) {

@@ -1,8 +1,9 @@
+import { Pokemon } from '@/lib/types';
+
 export interface PokeState {
-  favorites: string[];
+  favorites: Pokemon[];
 }
 
 export interface AuthActions {
-  addFavorite: (id: string) => void;
-  removeFavorite: (id: string) => void;
+  toggleFavorite: (id: Pokemon) => void;
 }

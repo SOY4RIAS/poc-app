@@ -2,12 +2,15 @@
 
 import Image from 'next/image';
 import { Heart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { POKEMON_IMAGE_URL } from '@/lib/constants/url';
 import { Button } from '@/components/ui/button';
 import { usePokeStore } from '@/providers/PokeStoreProvider';
-import { cn } from '@/lib/utils';
+import { cn, extractId } from '@/lib/utils';
+import { Paths } from '@/lib/constants';
+import { animatePageOut } from '@/animations';
 
 interface PokeItemProps {
   data: {
@@ -17,22 +20,29 @@ interface PokeItemProps {
 }
 
 export function PokeItem({ data }: PokeItemProps) {
-  const { favorites, addFavorite, removeFavorite } = usePokeStore(
-    (state) => state
-  );
+  const router = useRouter();
+  const { toggleFavorite, isFavorite } = usePokeStore((state) => {
+    return {
+      isFavorite: !!state.favorites.find(
+        (pokemon) => pokemon.name === data.name
+      ),
+      toggleFavorite: state.toggleFavorite,
+    };
+  });
 
-  const isFavorite = favorites.includes(data.name);
+  const handleFavorite = () => toggleFavorite(data);
 
-  const handleFavorite = () => {
-    if (isFavorite) {
-      removeFavorite(data.name);
-    } else {
-      addFavorite(data.name);
-    }
+  const handleClick = () => {
+    const id = extractId(data.url);
+    animatePageOut(Paths.DETAIL.replace(':id', id), router);
   };
 
   return (
-    <Card className="hover:cursor-pointer hover:scale-105 hover:shadow-xl transition duration-200">
+    <Card
+      className="hover:cursor-pointer hover:scale-105 hover:shadow-xl transition duration-200"
+      role="listitem"
+      onClick={handleClick}
+    >
       <CardHeader className="relative">
         <CardTitle className="text-center capitalize">{data.name}</CardTitle>
         <Button

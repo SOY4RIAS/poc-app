@@ -28,7 +28,9 @@ export function PokeStoreProvider({ children }: PokeStoreProviderProps) {
   );
 }
 
-export function usePokeStore<T>(selector: (state: PokeStore) => T) {
+type PokeStoreSelector<T = PokeStore> = (state: PokeStore) => T;
+
+export function usePokeStore<T = PokeStore>(selector: PokeStoreSelector<T>) {
   const store = useContext(PokeStoreContext);
   if (!store) {
     throw new Error('usePokeStore must be used within an AuthStoreProvider');

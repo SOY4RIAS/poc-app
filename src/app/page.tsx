@@ -1,6 +1,6 @@
-import { FlaskConicalIcon, HomeIcon } from 'lucide-react';
+import { HeartIcon, HomeIcon } from 'lucide-react';
 
-import { Dummy, PokeList } from '@/app/components';
+import { PokeFavorites, PokeList } from '@/app/components';
 import { TabBuilder } from '@/components/TabBuilder';
 
 interface HomeProps {
@@ -23,9 +23,9 @@ export default async function Home({ searchParams }: HomeProps) {
             component: <PokeList search={search.toString()} />,
           },
           {
-            icon: <FlaskConicalIcon size={20} />,
-            label: 'Dummy',
-            component: <Dummy />,
+            icon: <HeartIcon size={20} />,
+            label: 'Favorites',
+            component: <PokeFavorites />,
           },
         ]}
       />

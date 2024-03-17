@@ -5,6 +5,7 @@ import {
   AuthActions as PokeActions,
   PokeState as PokeState,
 } from '@/store/pokeStore/types';
+import { Pokemon } from '@/lib/types';
 
 export type PokeStore = PokeState & PokeActions;
 
@@ -17,16 +18,20 @@ export const createPokeStore = (initialState: PokeState = defaultState) => {
     persist<PokeStore>(
       (set) => ({
         ...initialState,
-        addFavorite(id) {
-          set((state) => ({
-            favorites: [...state.favorites, id],
-          }));
-        },
-        removeFavorite(id) {
-          set((state) => ({
-            favorites: state.favorites.filter((f) => f !== id),
-          }));
-        },
+        toggleFavorite: (item: Pokemon) =>
+          set((state) => {
+            const isFavorite = !!state.favorites.find(
+              (pokemon) => pokemon.name === item.name
+            );
+
+            return {
+              favorites: isFavorite
+                ? state.favorites.filter(
+                    (pokemon) => pokemon.name !== item.name
+                  )
+                : [...state.favorites, item],
+            };
+          }),
       }),
       {
         name: btoa('poke-store'),

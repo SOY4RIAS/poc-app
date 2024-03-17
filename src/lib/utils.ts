@@ -4,3 +4,7 @@ import { twMerge } from 'tailwind-merge';
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+export const extractId = (url: string) => {
+  return url.split('/').at(-2) || '';
+};
