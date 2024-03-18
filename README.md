@@ -1,4 +1,4 @@
-> Warning: for some reason this project has unstable behavior with vercel.
+> Warning: for some reason this project has unstable behavior with vercel [Done].
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/next.svg" width="100" alt="project-logo">
@@ -99,7 +99,23 @@
 - **Node**: `version 20+`
 - **Bun**: `version 1.0.20+`
 
+### Pre-requisites
+
+> Local development
+> Ensure `.env.local` file in the project root directory with the following content:
+>
+> ```env
+> NEXT_PUBLIC_API_URL=
+> NEXT_PUBLIC_POKE_IMAGE_URL=
+> NEXTAUTH_SECRET=
+> ```
+> ⚠️ reference values can be reviewed in the `.env.example` file
+
 ### Installation
+
+```console
+$ bun install
+```
 
 <h4>From <code>source</code></h4>
 
