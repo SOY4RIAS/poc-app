@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Paths } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/auth/useAuth';
-import TransitionLink from '@/components/TransitionLink/TransitionLink';
+import { TransitionLink } from '@/components/TransitionLink/TransitionLink';
 
 export function Navbar() {
   const pathname = usePathname();

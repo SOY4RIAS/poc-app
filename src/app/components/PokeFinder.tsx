@@ -12,7 +12,7 @@ import {
   CommandList,
 } from '@/components/ui/command';
 import { useSearchPokemons } from '@/hooks/pokemon/useSearchPokemons';
-import TransitionLink from '@/components/TransitionLink/TransitionLink';
+import { TransitionLink } from '@/components/TransitionLink';
 import { Paths } from '@/lib/constants';
 
 export function PokeFinder() {

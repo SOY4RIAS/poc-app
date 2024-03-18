@@ -10,7 +10,7 @@ interface TransitionLinkProps {
   className?: string;
 }
 
-export default function TransitionLink({
+export function TransitionLink({
   href,
   children,
   className,
