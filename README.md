@@ -1,3 +1,5 @@
+> Warning: for some reason this project has unstable behavior with vercel.
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/next.svg" width="100" alt="project-logo">
 </p>
